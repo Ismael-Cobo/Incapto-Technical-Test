@@ -17,3 +17,7 @@ export type ValidViewsModel = {
     | MovementRotation
     | MovementKeyword
 }
+
+export type DirectionViewModelObject = {
+  [key in DirectionViewModel]: DirectionViewModel
+}

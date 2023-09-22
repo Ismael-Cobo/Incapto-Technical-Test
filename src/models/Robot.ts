@@ -7,6 +7,7 @@ import {
   Movement,
   MovementRotation,
   MovementKeyword,
+  DirectionViewModelObject,
 } from '../interfaces/Movement'
 
 export class Robot implements RobotModel {
@@ -36,88 +37,74 @@ export class Robot implements RobotModel {
     }
 
     movementToArray.forEach((value) => {
-      const { position, view } = this.position
+      const { view } = this.position
       const keyword =
         this.validViews[value as MovementRotation | MovementKeyword]
 
       if (keyword === undefined) return
 
-      if (keyword === 'L') {
-        if (view === 'N') {
-          this.position.view = 'W'
-          return
+      if (keyword === 'L' || keyword === 'R') {
+        const leftTurns: DirectionViewModelObject = {
+          N: 'W',
+          W: 'S',
+          S: 'E',
+          E: 'N',
         }
-        if (view === 'S') {
-          this.position.view = 'E'
-          return
+        const rightTurns: DirectionViewModelObject = {
+          N: 'E',
+          E: 'S',
+          S: 'W',
+          W: 'N',
         }
-        if (view === 'E') {
-          this.position.view = 'N'
-          return
-        }
-        if (view === 'W') {
-          this.position.view = 'S'
-          return
-        }
-        return
-      }
-      if (keyword === 'R') {
-        if (view === 'N') {
-          this.position.view = 'E'
-          return
-        }
-        if (view === 'S') {
-          this.position.view = 'W'
-          return
-        }
-        if (view === 'E') {
-          this.position.view = 'S'
-          return
-        }
-        if (view === 'W') {
-          this.position.view = 'N'
-          return
-        }
-        return
+
+        this.position.view =
+          keyword === 'L' ? leftTurns[view] : rightTurns[view]
       }
 
       if (keyword === 'M') {
-        let nextX = position.x
-        let nextY = position.y
-
-        if (view === 'N') {
-          this.position.position.y =
-            nextY + this.MOVEMENT_PER_ACTION > this.MAXIMUM_GRID_VALUE
-              ? this.MINIMUM_GRID_VALUE
-              : nextY + this.MOVEMENT_PER_ACTION
-          return
-        }
-        if (view === 'S') {
-          this.position.position.y =
-            nextY - this.MOVEMENT_PER_ACTION < this.MINIMUM_GRID_VALUE
-              ? this.MAXIMUM_GRID_VALUE
-              : nextY - this.MOVEMENT_PER_ACTION
-          return
-        }
-        if (view === 'E') {
-          this.position.position.x =
-            nextX + this.MOVEMENT_PER_ACTION > this.MAXIMUM_GRID_VALUE
-              ? this.MINIMUM_GRID_VALUE
-              : nextX + this.MOVEMENT_PER_ACTION
-          return
-        }
-        if (view === 'W') {
-          this.position.position.x =
-            nextX - this.MOVEMENT_PER_ACTION < this.MINIMUM_GRID_VALUE
-              ? this.MAXIMUM_GRID_VALUE
-              : nextX - this.MOVEMENT_PER_ACTION
-          return
-        }
-
+        this.calculatePosition()
         return
       }
     })
   }
 
   public getPosition = (): RobotPositionModel => this.position
+
+  private calculatePosition = (): void => {
+    const { position, view } = this.position
+
+    const xPlusAction = position.x + this.MOVEMENT_PER_ACTION
+    const xMinusAction = position.x - this.MOVEMENT_PER_ACTION
+    const yPlusAction = position.y + this.MOVEMENT_PER_ACTION
+    const yMinusAction = position.y - this.MOVEMENT_PER_ACTION
+
+    if (view === 'N') {
+      this.position.position.y =
+        yPlusAction > this.MAXIMUM_GRID_VALUE
+          ? this.MINIMUM_GRID_VALUE
+          : yPlusAction
+      return
+    }
+    if (view === 'S') {
+      this.position.position.y =
+        yMinusAction < this.MINIMUM_GRID_VALUE
+          ? this.MAXIMUM_GRID_VALUE
+          : yMinusAction
+      return
+    }
+    if (view === 'E') {
+      this.position.position.x =
+        xPlusAction > this.MAXIMUM_GRID_VALUE
+          ? this.MINIMUM_GRID_VALUE
+          : xPlusAction
+      return
+    }
+    if (view === 'W') {
+      this.position.position.x =
+        xMinusAction < this.MINIMUM_GRID_VALUE
+          ? this.MAXIMUM_GRID_VALUE
+          : xMinusAction
+      return
+    }
+  }
 }
