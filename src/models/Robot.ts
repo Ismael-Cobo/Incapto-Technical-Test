@@ -34,12 +34,14 @@ export class Robot implements RobotModel {
       position: { x: 0, y: 0 },
       view: 'N',
     }
-    const { position, view } = this.position
+
     movementToArray.forEach((value) => {
+      const { position, view } = this.position
       const keyword =
         this.validViews[value as MovementRotation | MovementKeyword]
 
       if (keyword === undefined) return
+
       if (keyword === 'L') {
         if (view === 'N') {
           this.position.view = 'W'
@@ -84,28 +86,28 @@ export class Robot implements RobotModel {
         let nextY = position.y
 
         if (view === 'N') {
-          position.y =
+          this.position.position.y =
             nextY + this.MOVEMENT_PER_ACTION > this.MAXIMUM_GRID_VALUE
               ? this.MINIMUM_GRID_VALUE
               : nextY + this.MOVEMENT_PER_ACTION
           return
         }
         if (view === 'S') {
-          position.y =
+          this.position.position.y =
             nextY - this.MOVEMENT_PER_ACTION < this.MINIMUM_GRID_VALUE
               ? this.MAXIMUM_GRID_VALUE
               : nextY - this.MOVEMENT_PER_ACTION
           return
         }
         if (view === 'E') {
-          position.x =
+          this.position.position.x =
             nextX + this.MOVEMENT_PER_ACTION > this.MAXIMUM_GRID_VALUE
               ? this.MINIMUM_GRID_VALUE
               : nextX + this.MOVEMENT_PER_ACTION
           return
         }
         if (view === 'W') {
-          position.x =
+          this.position.position.x =
             nextX - this.MOVEMENT_PER_ACTION < this.MINIMUM_GRID_VALUE
               ? this.MAXIMUM_GRID_VALUE
               : nextX - this.MOVEMENT_PER_ACTION
