@@ -7,7 +7,7 @@ export const createMovementRouter = (robot: IRobotModel): Router => {
 
   const movementController = new MovementController(robot)
 
-  router.get('/getMovement', movementController.getMovement)
+  router.post('/getMovement', movementController.getMovement)
 
   return router
 }

@@ -7,7 +7,7 @@ describe('Robot movement API', () => {
   let application = app.getApp()
 
   test('should calculate the final position correctly with a complex sequence of motions', async () => {
-    const response = await request(application).get(API_URL).send({
+    const response = await request(application).post(API_URL).send({
       movement: 'LMMMRMMRRMMMMML',
     })
     const result = { ok: true, result: '7:7:E' }
@@ -15,7 +15,7 @@ describe('Robot movement API', () => {
   })
 
   test('should have an initial position at 0:0:N when no movement is provided.', async () => {
-    const response = await request(application).get(API_URL).send({
+    const response = await request(application).post(API_URL).send({
       movement: '',
     })
     const result = { ok: true, result: '0:0:N' }
