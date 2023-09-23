@@ -1,10 +1,8 @@
 import { Router } from 'express'
-import {
-  MovementController,
-  RobotModel,
-} from '../controllers/movementController'
+import { MovementController } from '../controllers/movementController'
+import { IRobotModel } from '../interfaces/Movement'
 
-export const createMovementRouter = (robot: RobotModel): Router => {
+export const createMovementRouter = (robot: IRobotModel): Router => {
   const router = Router()
 
   const movementController = new MovementController(robot)

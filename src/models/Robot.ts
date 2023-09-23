@@ -1,4 +1,3 @@
-import { RobotModel } from '../controllers/movementController'
 import {
   DirectionViewModel,
   GridPositionModel,
@@ -8,9 +7,10 @@ import {
   MovementRotation,
   MovementKeyword,
   DirectionViewModelObject,
+  IRobotModel,
 } from '../interfaces/Movement'
 
-export class Robot implements RobotModel {
+export class Robot implements IRobotModel {
   private readonly INITIAL_VIEW: DirectionViewModel = 'N'
   private readonly INITIAL_GRID_POSITION: GridPositionModel = { x: 0, y: 0 }
   private readonly validViews: ValidViewsModel = {

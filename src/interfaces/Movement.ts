@@ -21,3 +21,8 @@ export type ValidViewsModel = {
 export type DirectionViewModelObject = {
   [key in DirectionViewModel]: DirectionViewModel
 }
+
+export interface IRobotModel {
+  move: ({ movement }: Movement) => void
+  getPosition: () => RobotPositionModel
+}
