@@ -1,24 +1,22 @@
-# API de Control de Movimiento de Robot
+# Robot Movement Control API
 
-Este repositorio contiene una API diseñada para controlar un robot capaz de analizar el terreno y generar una vista 3D a partir de fotos tomadas. La API permite mover al robot mediante comandos y proporciona la posición y dirección finales del robot después de recibir una secuencia de movimientos.
+This repository contains an API designed to control a robot capable of analyzing the terrain and generating a 3D view from photos taken. The API allows to move the robot by commands and provides the final position and direction of the robot after receiving a sequence of movements.
 
-## Uso
+## 🚀 Instalation
 
-## 🚀 Instalación
-
-1. Clona este repositorio a tu máquina local:
+1. Clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/tuusuario/nombre-del-repo.git
 ```
 
-2. Instala las dependencias:
+2. Install the dependencies:
 
 ```bash
 npm install
 ```
 
-## 💻 Ejecución
+## 💻 Execution
 
 ```bash
 npm start
@@ -26,15 +24,15 @@ npm start
 
 ## 📡 API Endpoints
 
-`GET /getMovement`: Este endpoint permite enviar comandos de movimiento al robot. Los comandos se envían en el cuerpo de la solicitud y la API devuelve la posición y dirección finales del robot.
+`GET /getMovement`: This endpoint allows to send movement commands to the robot. The commands are sent in the body of the request and the API returns the final position and direction of the robot.
 
-Ejemplo de la solicitud:
+Example of the request:
 
 ```bash
 curl -X GET http://localhost:3000/getMovement -H "Content-Type: application/json" -d '{"movement": "LMMMRMMRRMMMMML"}'
 ```
 
-Ejemplo de la respuesta:
+Example of the response:
 
 ```json
 {
@@ -45,8 +43,20 @@ Ejemplo de la respuesta:
 
 ## ✅ Testing
 
+### Unit tests
+
 `Run unit tests with Jest and Supertest`
 
 ```bash
 npm run test
+```
+
+### Code Coverage
+
+We maintain a high level of code coverage in this project to ensure the reliability of our code. Currently, our unit tests provide 100% code coverage, meaning that every line of code is tested.
+
+To generate a code coverage report and check the coverage details, you can use the following command:
+
+```bash
+npm run test:coverage
 ```
