@@ -25,5 +25,6 @@ class Server {
   }
 
   public getApp = () => this.app
+  public getPort = () => this.port
 }
 export default Server

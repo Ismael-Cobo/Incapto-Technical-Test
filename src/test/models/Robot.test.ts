@@ -24,6 +24,13 @@ describe('Robot movement Class', () => {
     expect(JSON.stringify(actual)).toBe(JSON.stringify(result))
   })
 
+  test('should be in the same position and view', () => {
+    robot.move({ movement: 'QWETYUI' })
+    const actual = robot.getPosition()
+    const result = { position: { x: 0, y: 0 }, view: 'N' }
+    expect(JSON.stringify(actual)).toBe(JSON.stringify(result))
+  })
+
   test('should reflect the sequence of movements', () => {
     robot.move({ movement: 'LMRMM' })
     const actual = robot.getPosition()
@@ -31,8 +38,15 @@ describe('Robot movement Class', () => {
     expect(JSON.stringify(actual)).toBe(JSON.stringify(result))
   })
 
-  test('should reflect the sequence of movements across grid edges', () => {
+  test('should reflect the sequence of movements across the y grid edge', () => {
     robot.move({ movement: 'MMMMMMMMMM' })
+    const actual = robot.getPosition()
+    const result = { position: { x: 0, y: 0 }, view: 'N' }
+    expect(JSON.stringify(actual)).toBe(JSON.stringify(result))
+  })
+
+  test('should reflect the sequence of movements across the x grid edge', () => {
+    robot.move({ movement: 'RMMMMMMMMMML' })
     const actual = robot.getPosition()
     const result = { position: { x: 0, y: 0 }, view: 'N' }
     expect(JSON.stringify(actual)).toBe(JSON.stringify(result))
@@ -45,7 +59,7 @@ describe('Robot movement Class', () => {
     expect(JSON.stringify(actual)).toBe(JSON.stringify(result))
   })
 
-  test('should bedefault value  if nothing passed', () => {
+  test('should be default value  if nothing passed', () => {
     robot.move({ movement: '' })
     const actual = robot.getPosition()
     const result = { position: { x: 0, y: 0 }, view: 'N' }
