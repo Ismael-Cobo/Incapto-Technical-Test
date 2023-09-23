@@ -10,8 +10,9 @@ export class MovementController {
   getMovement = (req: Request<{}, {}, Movement>, res: Response): void => {
     const movement = req.body
     this._robot.move(movement)
-    const robotPosition = this._robot.getPosition()
-    res.status(200).send({ ok: true, body: robotPosition })
+    const { position, view } = this._robot.getPosition()
+    const { x, y } = position
+    res.status(200).send({ ok: true, result: `${x}:${y}:${view}` })
     return
   }
 }

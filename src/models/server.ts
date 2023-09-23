@@ -12,12 +12,10 @@ class Server {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
-      console.log(`Server running at ${process.env.API_URL}${this.port}`)
-    })
+    this.app.listen(this.port)
   }
 
-  public middlewares() {
+  private middlewares() {
     this.app.use(cors())
     this.app.use(express.json())
   }
@@ -25,5 +23,7 @@ class Server {
   public router(path: string, router: Router) {
     this.app.use(path, router)
   }
+
+  public getApp = () => this.app
 }
 export default Server

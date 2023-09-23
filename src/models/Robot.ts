@@ -37,28 +37,14 @@ export class Robot implements IRobotModel {
     }
 
     movementToArray.forEach((value) => {
-      const { view } = this.position
       const keyword =
         this.validViews[value as MovementRotation | MovementKeyword]
 
       if (keyword === undefined) return
 
       if (keyword === 'L' || keyword === 'R') {
-        const leftTurns: DirectionViewModelObject = {
-          N: 'W',
-          W: 'S',
-          S: 'E',
-          E: 'N',
-        }
-        const rightTurns: DirectionViewModelObject = {
-          N: 'E',
-          E: 'S',
-          S: 'W',
-          W: 'N',
-        }
-
-        this.position.view =
-          keyword === 'L' ? leftTurns[view] : rightTurns[view]
+        this.calculateView(keyword)
+        return
       }
 
       if (keyword === 'M') {
@@ -69,6 +55,25 @@ export class Robot implements IRobotModel {
   }
 
   public getPosition = (): RobotPositionModel => this.position
+
+  private calculateView = (keyword: MovementRotation): void => {
+    const { view } = this.position
+
+    const leftTurns: DirectionViewModelObject = {
+      N: 'W',
+      W: 'S',
+      S: 'E',
+      E: 'N',
+    }
+    const rightTurns: DirectionViewModelObject = {
+      N: 'E',
+      E: 'S',
+      S: 'W',
+      W: 'N',
+    }
+
+    this.position.view = keyword === 'L' ? leftTurns[view] : rightTurns[view]
+  }
 
   private calculatePosition = (): void => {
     const { position, view } = this.position
