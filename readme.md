@@ -53,9 +53,7 @@ npm run test
 
 ### Code Coverage
 
-We maintain a high level of code coverage in this project to ensure the reliability of our code. Currently, our unit tests provide 100% code coverage, meaning that every line of code is tested.
-
-To generate a code coverage report and check the coverage details, you can use the following command:
+`Run testwith coverage`
 
 ```bash
 npm run test:coverage
