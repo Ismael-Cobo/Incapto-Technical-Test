@@ -1,6 +1,8 @@
 import express, { Application, Router } from 'express'
 import cors from 'cors'
 
+
+//[FEEDBACK](correcto): Buena implementación de un modelo de servidor.
 class Server {
   private app: Application
   private port: string

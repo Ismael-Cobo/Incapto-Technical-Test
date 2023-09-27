@@ -31,6 +31,9 @@ export class Robot implements IRobotModel {
   public move({ movement }: Movement): void {
     const movementToArray = movement.toUpperCase().split('')
 
+    //[FEEDBACK](mejora): No debería hacer falta reiniciar la posición del robot dentro del metodo de movimiento, este problema debería solucionarse
+    //inicializando el objeto cada vez que se llama al endpoint en lugar de tener un objeto persistente al que le modificas la posción,
+    //ya que la responsabilidad de setear la posición inicial no debería ser del mismo método que lo mueve.
     this.position = {
       position: { x: 0, y: 0 },
       view: 'N',
@@ -40,6 +43,7 @@ export class Robot implements IRobotModel {
       const keyword =
         this.validViews[value as MovementRotation | MovementKeyword]
 
+      //[FEEDBACK](mejora): Esta comprobación debería ser innecesaria si se hubiera hecho una buena validación del input en el endpoint
       if (keyword === undefined) return
 
       if (keyword === 'L' || keyword === 'R') {
