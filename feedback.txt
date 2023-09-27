@@ -1,0 +1,20 @@
+En este archivo se pondrá el feedback general, además de los comentarios añadidos en el código con el flag [FEEDBACK]({feedback_type})
+
+Mejoras:
+1- Los nombres dados a los controladores, metodos, endpoints y funciones, no terminan de tener mucho sentido con el objetivo real.
+2- Aunque esté bien el hecho de implementar una interficie para el robot, está no debería usarse para instanciar objetos durant el proceso
+debería usarse unicamente para crear el modelo del robot como una extensión de dicha interficie y en el resto de la aplicación deberían usarse
+objetos del modelo robot.
+
+
+Errores:
+1- No se ha definido un modelo para el grid
+2- No se ha usado try/catch en ningun punto de la aplicación
+3- El formato del output no cumple los requisitos descritos en la prueba
+4- El formato del input no cumple los requisitos descritos en la prueba
+5- No hay control de errores
+
+Positivo:
+1- Implementación de test unitarios con correcta separación
+2- Buena separación de responsabilidades en el controlador
+3- Correcto uso del .gitignore

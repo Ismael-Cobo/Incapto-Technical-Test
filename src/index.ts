@@ -5,6 +5,8 @@ import { Robot } from './models/Robot'
 dotenv.config()
 
 const app = new Server()
+
+//[FEEDBACK](error): No se debería inicializar el robot en el index
 const robot = new Robot()
 
 app.listen()
